@@ -1,0 +1,10 @@
+._video_speed_display {
+	position: fixed;
+	z-index: 9999;
+	transform: translate(-50%, -50%);
+	font-size: 2em;
+	background: rgba(0, 0, 0, 0.6);
+	color: #ffffff;
+	padding: 10px 20px;
+	border-radius: 20px;
+}

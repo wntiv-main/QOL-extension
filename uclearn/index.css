@@ -1,0 +1,237 @@
+body, html>body {
+	background-attachment: fixed;
+	background-size: cover;
+	background-position: center;
+	color: white;
+}
+
+.drawer, .main-inner, #page.drawers div.main-inner {
+	background-color: #10101080 !important;
+	backdrop-filter: blur(5px);
+}
+
+.que :is(img, video) {
+	border-radius: 10px;
+	filter: invert(0.95) hue-rotate(180deg);
+}
+
+.img-fluid {
+	border-radius: 10px;
+}
+
+body .video-js {
+	background-color: transparent;
+}
+
+.main-inner, #page.drawers div.main-inner {
+	border-radius: 20px !important;
+}
+
+#region-main, section#region-main {
+	background: transparent;
+}
+
+.formulation, div.formulation {
+	background-color: transparent !important;
+	color: inherit !important;
+}
+
+div.que .info {
+	background-color: transparent;
+	border: solid white;
+	border-width: 0 0 1px 1px;
+	border-radius: 0 0 0 10px;
+	margin: -5px -5px 0 0;
+	padding: 10px;
+	float: inline-end;
+	text-align: end;
+	position: relative;
+	z-index: 1;
+}
+
+div.que .content {
+	margin-left: 0;
+}
+
+a, body a {
+	color: lightblue;
+}
+
+a:hover, body a:hover {
+	color: #80cce6;
+}
+
+div.que.multichoice .answer .specificfeedback {
+	background-color: transparent;
+}
+
+div.que {
+	border: 1px solid;
+}
+
+body .que.stack .formulation .stackprtfeedback {
+	vertical-align: middle;
+	margin: 0 0 0 2ch;
+	border: 1px solid;
+}
+
+div.que,
+div.que .outcome,
+div.que .comment,
+div.que.stack .formulation .stackprtfeedback,
+div.description .course-description-item,
+div.description .course-description-item,
+div.ln-important-box,
+div.que.stack .stackinputfeedback.compact,
+div.que.stack .stackinputfeedback.standard,
+div.que.stack input[type=text],
+.__qol-uclearn-mathquillField,
+div.forumpost,
+div.modal-content,
+span#MathJax_Zoom,
+div.ln-important-box-definition,
+body .que.ddwtos .draghome {
+	background-color: transparent;
+	color: inherit;
+	border-color: currentColor;
+	border-radius: 10px;
+	padding: 5px;
+}
+
+div.que .outcome,
+div.que .comment,
+div.que.stack .formulation .stackprtfeedback,
+div.description .course-description-item {
+	background-color: #10101080;
+	width: fit-content;
+	padding: 10px;
+}
+
+div.modal-content, span#MathJax_Zoom {
+	background-color: #10101080;
+	backdrop-filter: blur(5px);
+}
+
+body table.quizreviewsummary :is(td, th).cell {
+	background-color: transparent;
+}
+
+div.que.multichoice .answer div.r0, div.que.multichoice .answer div.r1 {
+	align-items: baseline;
+}
+
+div.que .answer div.r0 span:has(.icon), div.que .answer div.r1 span:has(.icon) {
+	flex-grow: 1;
+	text-align: right;
+	margin-left: 20px;
+}
+
+div.que .answer {
+	max-width: max-content;
+}
+
+#mod_quiz_navblock {
+	background-color: transparent;
+	border: none;
+}
+
+.icon.text-success {
+	color: lightgreen !important;
+}
+
+.courseindex .courseindex-item a.courseindex-link,
+.courseindex .courseindex-item a.courseindex-chevron,
+.primary-navigation .navigation a.nav-link {
+	color: #e0e0e0;
+}
+
+.courseindex .courseindex-item:hover a.courseindex-link,
+.courseindex .courseindex-item:hover a.courseindex-chevron,
+.moremenu a.nav-link:hover, .moremenu a.nav-link:focus {
+	color: #d0d0d0;
+}
+
+.moremenu a.nav-link:hover, .moremenu a.nav-link:focus {
+	background-color: #ffffff10;
+}
+
+#footnote {
+	display: none;
+}
+
+.card, section.card, div.card {
+	background-color: transparent;
+	border: 1px solid currentColor;
+}
+
+.card-body {
+	overflow: hidden;
+}
+
+.card-deck.overflow-hidden {
+	overflow: visible !important;
+}
+
+nav.navigation, .secondary-navigation nav.navigation {
+	background-color: transparent;
+}
+
+nav.moremenu .nav-tabs {
+	background-color: transparent;
+}
+
+nav.navbar {
+	background-color: #00000080 !important;
+	backdrop-filter: blur(5px);
+}
+
+nav.navbar img {
+	filter: invert(1);
+}
+
+li .activity:hover {
+	background-color: transparent !important;
+}
+
+.path-mod div.activity-header:not(:empty) {
+	background-color: transparent;
+	margin: 0;
+	padding: 0;
+}
+
+table.generaltable {
+	color: inherit;
+}
+
+.que.stack .__qol-uclearn-mathquillField+input.algebraic,
+.que.stack .__qol-uclearn-mathquillField+input.algebraic~.stackinputfeedback,
+.que.stack p:has(.__qol-uclearn-mathquillField)+.stackinputfeedback {
+	display: none;
+}
+
+.que.stack .__qol-uclearn-mathquillField:active+input.algebraic~.stackinputfeedback,
+.que.stack p:has(.__qol-uclearn-mathquillField:active)+.stackinputfeedback {
+	display: revert;
+}
+
+.__qol-uclearn-mathquillField, .__qol-uclearn-mathquillField .mq-cursor {
+	border-color: currentColor !important;
+}
+
+div.ln-section-heading {
+	border-color: currentColor;
+}
+
+div:is(#page, #page.drawers), .theme-boost-union-smartmenu .navbar.fixed-top~div#page.drawers {
+	margin-top: 0px;
+	padding-top: 60px;
+	height: auto;
+}
+
+body #page.drawers .drawer-right-toggle {
+	margin-right: 0;
+}
+
+.ln-svg-figure {
+	max-width: 100%;
+}

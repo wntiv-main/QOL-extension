@@ -1,0 +1,43 @@
+{
+	"name": "QOL",
+	"version": "0.1",
+	"description": "Quality of Life features for optimised web browsing",
+	"permissions": ["storage", "scripting"],
+	"host_permissions": ["<all_urls>", "*://learn.canterbury.ac.nz/*"],
+	"web_accessible_resources": [
+		{
+			"resources": [
+				"uclearn/background.png",
+				"uclearn/mathquill/bootload.js",
+				"uclearn/mathquill/mathquill.min.js",
+				"uclearn/ASCIIMathTeXImg.js"
+			],
+			"matches": ["*://learn.canterbury.ac.nz/*"]
+		}
+	],
+	"icons": {
+		"16": "images/get_started16.png",
+		"32": "images/get_started32.png",
+		"48": "images/get_started48.png",
+		"128": "images/get_started128.png"
+	},
+	"content_scripts": [
+		{
+			"matches": ["*://*.canterbury.ac.nz/*"],
+			"css": ["uclearn/index.css", "uclearn/mathquill/mathquill.css"],
+			"js": ["uclearn/index.js"],
+			"run_at": "document_idle"
+		},
+		{
+			"matches": ["<all_urls>"],
+			"css": ["video-speed/index.css"],
+			"js": ["video-speed/index.js"],
+			"all_frames": true,
+			"match_origin_as_fallback": true,
+			"match_about_blank": true,
+			"run_at": "document_start",
+			"world": "MAIN"
+		}
+	],
+	"manifest_version": 3
+}
