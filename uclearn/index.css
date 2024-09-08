@@ -10,9 +10,25 @@ body, html>body {
 	backdrop-filter: blur(5px);
 }
 
-.que :is(img, video) {
+.que :is(img, canvas.uclearn-video-canvas, video, svg) {
 	border-radius: 10px;
 	filter: invert(0.95) hue-rotate(180deg);
+}
+
+.que canvas.uclearn-video-canvas+video {
+	opacity: 0;
+}
+
+.que *:has(canvas.uclearn-video-canvas + video) {
+	position: relative;
+}
+
+.que canvas.uclearn-video-canvas {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
 }
 
 .img-fluid {
@@ -21,6 +37,8 @@ body, html>body {
 
 body .video-js {
 	background-color: transparent;
+	border: 1px solid currentColor;
+	border-radius: 5px;
 }
 
 .main-inner, #page.drawers div.main-inner {
@@ -38,7 +56,7 @@ body .video-js {
 
 div.que .info {
 	background-color: transparent;
-	border: solid white;
+	border: solid currentColor;
 	border-width: 0 0 1px 1px;
 	border-radius: 0 0 0 10px;
 	margin: -5px -5px 0 0;
@@ -75,22 +93,27 @@ body .que.stack .formulation .stackprtfeedback {
 	border: 1px solid;
 }
 
-div.que,
-div.que .outcome,
-div.que .comment,
-div.que.stack .formulation .stackprtfeedback,
-div.description .course-description-item,
-div.description .course-description-item,
-div.ln-important-box,
-div.que.stack .stackinputfeedback.compact,
-div.que.stack .stackinputfeedback.standard,
-div.que.stack input[type=text],
+div.que.stack input[type=text] {
+	border: 1px solid;
+}
+
+:root .que,
+:root .que .outcome,
+:root .que .comment,
+:root .que.stack .formulation .stackprtfeedback,
+:root .description .course-description-item,
+:root .description .course-description-item,
+:root .ln-important-box,
+:root .que.stack .stackinputfeedback.compact,
+:root .que.stack .stackinputfeedback.standard,
+:root .que.stack input[type=text],
 .__qol-uclearn-mathquillField,
-div.forumpost,
-div.modal-content,
+:root .ln-optional,
+:root .forumpost,
+:root .modal-content,
 span#MathJax_Zoom,
-div.ln-important-box-definition,
-body .que.ddwtos .draghome {
+:root .ln-important-box-definition,
+:root .que.ddwtos .draghome {
 	background-color: transparent;
 	color: inherit;
 	border-color: currentColor;
@@ -98,10 +121,10 @@ body .que.ddwtos .draghome {
 	padding: 5px;
 }
 
-div.que .outcome,
-div.que .comment,
-div.que.stack .formulation .stackprtfeedback,
-div.description .course-description-item {
+:root .que .outcome,
+:root .que .comment,
+:root .que.stack .formulation .stackprtfeedback,
+:root .description .course-description-item {
 	background-color: #10101080;
 	width: fit-content;
 	padding: 10px;
@@ -203,13 +226,13 @@ table.generaltable {
 	color: inherit;
 }
 
-.que.stack .__qol-uclearn-mathquillField+input.algebraic,
-.que.stack .__qol-uclearn-mathquillField+input.algebraic~.stackinputfeedback,
+.que.stack .__qol-uclearn-mathquillField+input,
+.que.stack .__qol-uclearn-mathquillField~.stackinputfeedback,
 .que.stack p:has(.__qol-uclearn-mathquillField)+.stackinputfeedback {
 	display: none;
 }
 
-.que.stack .__qol-uclearn-mathquillField:active+input.algebraic~.stackinputfeedback,
+.que.stack .__qol-uclearn-mathquillField:active~.stackinputfeedback,
 .que.stack p:has(.__qol-uclearn-mathquillField:active)+.stackinputfeedback {
 	display: revert;
 }
@@ -234,4 +257,12 @@ body #page.drawers .drawer-right-toggle {
 
 .ln-svg-figure {
 	max-width: 100%;
+}
+
+body .activity-item :is(.activity-info, .activity-actions) {
+	align-self: center;
+}
+
+.activity-item:hover {
+	background-color: #00000080;
 }

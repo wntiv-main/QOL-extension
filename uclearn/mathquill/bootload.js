@@ -7,14 +7,15 @@
 		mathquillScript.addEventListener("load", () => {
 			console.log("MathQuill ready");
 			const MQ = MathQuill.getInterface(2);
-			for(const input of document.querySelectorAll(".que.stack input.algebraic")) {
+			for(const input of document.querySelectorAll(".que.stack input:is(.algebraic, .numerical), .que.stack .matrixtable input")) {
+				if(input.closest('[hidden]')) continue;
 				const fieldContainer = document.createElement("span");
 				fieldContainer.classList.add("__qol-uclearn-mathquillField");
 				input.insertAdjacentElement('beforebegin', fieldContainer);
 				let skipUpdate = false;
 				const field = MQ.MathField(fieldContainer, {
 					spaceBehavesLikeTab: true,
-					autoCommands: 'pi theta',
+					autoCommands: 'pi theta sqrt sum int',
 					handlers: {
 						enter(field) {
 							field.el().closest(".que").querySelector("button[type=\"submit\"]").click();
@@ -31,7 +32,7 @@
 								// sin(), cos(), etc...
 								.replaceAll(/\\((?:\w\*)*\w)(?:\s*\*)?/g, (_, g1) => g1.replaceAll('*', ''))
 								// Constant multiplier of bracketed group
-								.replaceAll(/(?<=\d)(\(|pi|theta)/g, '*$1')
+								.replaceAll(/(?<=\d|\))(\(|pi|theta)/g, '*$1')
 								// factorial
 								.replaceAll(/\*!/g, '!');
 							const textExps = text.matchAll(/\^/g);
