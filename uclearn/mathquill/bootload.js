@@ -17,8 +17,23 @@
 					spaceBehavesLikeTab: true,
 					autoCommands: 'pi theta sqrt sum int',
 					handlers: {
-						enter(field) {
-							field.el().closest(".que").querySelector("button[type=\"submit\"]").click();
+						enter(math) {
+							// this.edit(field);
+							// Find next field
+							const el = math.el().querySelector(".mq-textarea textarea");
+							if(!(el instanceof HTMLTextAreaElement)) return;
+							const fields = [...el.form.elements];
+							const nextFields = fields.slice(fields.indexOf(el) + 1);
+							for(const field of nextFields) {
+								if(field.getAttribute("name") === "previous") continue;
+								if(!field.checkVisibility()) continue;
+								field.focus();
+								if((field.tagName === "INPUT" || field.tagName === "BUTTON")
+									&& field.getAttribute("type").toLowerCase().trim() === "submit") {
+									field.click();
+								}
+								break;
+							}
 						},
 						edit(field) {
 							if(skipUpdate) {
@@ -27,19 +42,21 @@
 							}
 							const latex = field.latex();
 							if(typeof latex !== 'string') return;
-							const latexExps = latex.matchAll(/\^/g);
+							const latexExps = latex.matchAll(/\^(?!\{?\()/g);
 							let text = field.text()
 								// sin(), cos(), etc...
-								.replaceAll(/\\((?:\w\*)*\w)(?:\s*\*)?/g, (_, g1) => g1.replaceAll('*', ''))
+								// .replaceAll(/\\((?:\w\*)*\w)(?:\s*\*)?/g, (_, g1) => g1.replaceAll('*', ''))
 								// Constant multiplier of bracketed group
-								.replaceAll(/(?<=\d|\))(\(|pi|theta)/g, '*$1')
+								.replaceAll(/(\w(?<!sinh?|cosh?|tanh?|exp|sqrt)|\))(\(|(?<=\d)[a-zA-Z\\]|(?<=\))\w)/g, "$1*$2")
+								// .replaceAll(/(?<=\w|\))(?<!sinh?|cosh?|tanh?|exp|sqrt)(\(|pi|theta)|(?<=\)|\d)(\w)/g, '*$1')
 								// factorial
 								.replaceAll(/\*!/g, '!');
-							const textExps = text.matchAll(/\^/g);
 							let lm;
-							let tm;
+							let tm = 0;
+							let dtm;
 							// biome-ignore lint/suspicious/noAssignInExpressions: >.<
-							while(!(lm = latexExps.next()).done && !(tm = textExps.next()).done) {
+							while(!(lm = latexExps.next()).done && (dtm = text.substring(tm + 1).search(/\^(?!\()/g)) != null) {
+								tm += dtm + 1;
 								let ti = 1;
 								let li = 1;
 								let depth = 0;
@@ -50,9 +67,9 @@
 									} else if(latex[li + lm.value.index] === '}') {
 										depth -= 1;
 										li++;
-									} else if(text[ti + tm.value.index] === '*') {
+									} else if(text[ti + tm] === '*') {
 										ti++;
-									} else if(latex[li + lm.value.index] === text[ti + tm.value.index]) {
+									} else if(latex[li + lm.value.index] === text[ti + tm]) {
 										ti++;
 										li++;
 									} else {
@@ -60,7 +77,7 @@
 									}
 								}
 								if(li > 2)
-									text = `${text.substring(0, tm.value.index + 1)}(${text.substring(tm.value.index + 1, tm.value.index + ti)})${text.substring(tm.value.index + ti)}`;
+									text = `${text.substring(0, tm + 1)}(${text.substring(tm + 1, tm + ti)})${text.substring(tm + ti)}`;
 							}
 							input.value = text;
 							input.dispatchEvent(new InputEvent("input"));
