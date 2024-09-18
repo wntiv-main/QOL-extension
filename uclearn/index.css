@@ -45,6 +45,17 @@ body, html>body {
 	background-color: var(--bg-translucent) !important;
 }
 
+:root .bg-secondary {
+	background-color: var(--bg-translucent);
+}
+
+:root .bg-secondary:is(:hover, :focus) {
+	background-color: var(--hover-bg);
+}
+
+:root .bg-secondary:active {
+	background-color: var(--active-bg);
+}
 
 .drawer {
 	background-color: var(--bg-translucent) !important;
@@ -108,11 +119,17 @@ body:not(.light-mode) {
 	}
 }
 
-.que canvas.uclearn-video-canvas+video {
+.video-js video {
 	opacity: 0;
 }
 
-.que *:has(canvas.uclearn-video-canvas + video) {
+:root .video-js {
+	background-color: var(--bg-translucent);
+	border: var(--border-style) currentColor;
+	border-radius: var(--radius);
+}
+
+.que *:has(canvas.uclearn-video-canvas + video, canvas.uclearn-video-canvas + * video) {
 	position: relative;
 }
 
@@ -125,12 +142,6 @@ body:not(.light-mode) {
 }
 
 .img-fluid {
-	border-radius: var(--radius);
-}
-
-body .video-js {
-	background-color: var(--bg-translucent);
-	border: var(--border-style) currentColor;
 	border-radius: var(--radius);
 }
 
@@ -242,6 +253,7 @@ table.generaltable {
 
 :root table.generaltable tbody :is(td, th) {
 	background-color: transparent;
+	color: inherit;
 	border: none;
 	padding: 0.25rem 1rem;
 }
@@ -258,11 +270,6 @@ table.generaltable {
 :root table.quizreviewsummary tbody :is(td, th):not(:last-child) {
 	border-right: var(--border-style) currentColor;
 	width: auto;
-}
-
-:root table.quizreviewsummary tbody tr:hover {
-	color: var(--hover-fg);
-	background-color: var(--hover-bg);
 }
 
 div.que.multichoice .answer div.r0, div.que.multichoice .answer div.r1 {
@@ -307,22 +314,50 @@ div.que .answer {
 
 :root .courseindex .courseindex-item:is(:hover, :focus),
 :root .courseindex .courseindex-item:is(:hover, :focus) .courseindex-link,
-:root .courseindex .courseindex-item:is(:hover, :focus) .courseindex-chevron,
-:root .moremenu .nav-link:hover,
-:root .moremenu .nav-link:focus {
+:root .courseindex .courseindex-item:is(:hover, :focus) .courseindex-chevron {
 	color: var(--hover-fg);
 }
 
-:root .moremenu .nav-link:hover,
-:root .moremenu .nav-link:focus {
-	background-color: var(--hover-bg);
+:root .custom-select {
+	--accent-bg: var(--bg-translucent);
+	background-color: var(--accent-bg);
 }
 
+:root .dropdown-item,
+:root .btn.btn-icon,
+:root .maincalendar .calendarmonth td .day-number-circle,
+:root section:not(#region-main) .block.block_calendar_month .maincalendar .calendartable.calendarmonth td.clickable:not(.today) .day-number-circle,
+:root .pagination .page-link {
+	--accent-bg: var(--color-action);
+}
+
+:root #inst4883681~#inst4918530 .card-text a:is(:hover, :focus),
+:root section:not(#region-main) .block.block_calendar_month .maincalendar .calendartable.calendarmonth td.clickable:not(.today):is(:hover, :focus) .day-number-circle,
+:root .pagination .page-link:is(:hover, :focus),
+:root :is(.btn, .block_alp_player a, .block_ucpreviousexams a, .card-body.block_ucskills a):is(:hover, :focus),
+:root .btn.btn-icon:is(:hover, :focus),
+:root .dropdown-item:is(:hover, :focus, :focus-visible),
+:root table.quizreviewsummary tbody tr:is(:hover, :focus),
+:root .moremenu .nav-link:is(:hover, :focus) {
+	background-color: color-mix(in hsl, var(--accent-bg, transparent) 50%, color-mix(in hsl, var(--foreground-color) 20%, transparent 80%) 50%);
+	color: var(--hover-fg);
+}
+
+:root #inst4883681~#inst4918530 .card-text a:active,
+:root .maincalendar .calendarmonth td.today .day-number-circle,
+:root section:not(#region-main) .block.block_calendar_month .maincalendar .calendartable.calendarmonth td.clickable:not(.today):active .day-number-circle,
+:root .pagination .page-link:active,
+:root .pagination .page-item.active .page-link,
+:root :is(.btn, .block_alp_player a, .block_ucpreviousexams a, .card-body.block_ucskills a):active,
+:root .btn.btn-icon:active,
+:root .dropdown-item:active,
+:root table.quizreviewsummary tbody tr:active,
 :root .nav-tabs .nav-link.active,
 :root .nav-tabs .nav-item.show .nav-link,
 :root .moremenu .nav-link.active:focus,
 :root .moremenu .nav-link.active:hover {
-	background-color: var(--active-bg);
+	background-color: color-mix(in hsl, var(--accent-bg, transparent) 70%, color-mix(in hsl, var(--foreground-color) 20%, transparent 80%) 30%);
+	color: var(--active-fg);
 }
 
 #footnote {
@@ -489,16 +524,6 @@ div.ln-section-heading {
 	top: 0;
 }
 
-:root .dropdown-item:is(:hover, :focus, :focus-visible) {
-	background-color: var(--bg-action-hover);
-	color: var(--hover-fg);
-}
-
-:root .dropdown-item:active {
-	background-color: var(--bg-action-active);
-	color: var(--active-fg);
-}
-
 .carousel-item {
 	outline: none;
 }
@@ -508,14 +533,24 @@ div.ln-section-heading {
 }
 
 :root .custom-select {
+	--accent-bg: var(--bg-translucent);
+	--final-bg: var(--accent-bg);
 	color: inherit;
 	background-color: var(--background);
 	background-clip: text;
-	box-shadow: inset 0 0 0 20px var(--bg-translucent);
+	box-shadow: inset 0 0 0 20px var(--final-bg);
+}
+
+:root .custom-select:is(:hover, :focus) {
+	--final-bg: color-mix(in hsl, var(--accent-bg) 50%, color-mix(in hsl, var(--foreground-color) 50%, transparent 50%) 50%);
+}
+
+:root .custom-select:active {
+	--final-bg: color-mix(in hsl, var(--accent-bg) 40%, color-mix(in hsl, var(--foreground-color) 50%, transparent 50%) 60%);
 }
 
 :root .custom-select:focus {
-	box-shadow: inset 0 0 0 20px var(--bg-translucent),
+	box-shadow: inset 0 0 0 20px var(--final-bg),
 		0 0 0 .2rem rgba(15, 108, 191, .75)
 }
 
@@ -531,24 +566,6 @@ div.ln-section-heading {
 	background-color: var(--bg-translucent);
 }
 
-:root :is(.btn, .block_alp_player a, .block_ucpreviousexams a):is(:hover, :focus) {
-	background-color: var(--hover-bg);
-	color: var(--hover-fg);
-}
-
-:root :is(.btn, .block_alp_player a):active {
-	background-color: var(--active-bg);
-	color: var(--active-fg);
-}
-
-:root .btn.btn-icon:hover, :root .btn.btn-icon:focus {
-	background-color: var(--bg-action-hover);
-}
-
-:root .btn.btn-icon:active {
-	background-color: var(--bg-action-active);
-}
-
 :root #page.drawers .drawer-right-toggle {
 	margin-right: 0;
 }
@@ -559,7 +576,8 @@ div.ln-section-heading {
 }
 
 :root .drawer-toggles .drawer-toggler .btn {
-	background-color: var(--bg-translucent);
+	--accent-bg: var(--bg-translucent);
+	background-color: var(--accent-bg);
 	backdrop-filter: var(--bg-effect);
 }
 
@@ -707,6 +725,7 @@ div:has(>.course-description-item h2 > br:only-child) {
 
 .section-navigation {
 	gap: 2rem;
+	align-items: center;
 }
 
 :root .drawercontent {
@@ -776,6 +795,10 @@ div:has(>.course-description-item h2 > br:only-child) {
 	margin-right: -315px;
 }
 
+:root #page.drawers, :root .drawercontent {
+	scrollbar-color: var(--foreground-color) var(--bg-translucent);
+}
+
 :root #page {
 	grid-area: navbar / page-left / page-end / page-right;
 	margin-inline: 0 !important;
@@ -822,28 +845,14 @@ div:has(>.course-description-item h2 > br:only-child) {
 	background-color: var(--active-bg);
 }
 
-:root .pagination .page-link:is(:hover, :focus) {
-	background-color: var(--bg-action-hover);
-	border: none;
-}
-
+:root .pagination .page-link:is(:hover, :focus),
 :root .pagination .page-link:active,
 :root .pagination .page-item.active .page-link {
-	background-color: var(--bg-action-active);
 	border: none;
 }
 
 :root .editmode-switch-form {
 	margin: 0;
-}
-
-:root section:not(#region-main) .block.block_calendar_month .maincalendar .calendartable.calendarmonth td.clickable:not(.today):hover .day-number-circle {
-	background-color: var(--bg-action-hover);
-}
-
-:root .maincalendar .calendarmonth td.today .day-number-circle,
-:root section:not(#region-main) .block.block_calendar_month .maincalendar .calendartable.calendarmonth td.clickable:not(.today):hover .day-number-circle {
-	background-color: var(--bg-action-active);
 }
 
 :root .block_custom_course_menu #searchbutton {
@@ -876,6 +885,11 @@ div:has(>.course-description-item h2 > br:only-child) {
 	text-align: center;
 	display: inline-block;
 	width: 100%;
+	padding: var(--radius);
+	border-radius: var(--radius);
+}
+
+:root #inst4883681 .card .card-body.block_ucskills a {
 	padding: var(--radius);
 	border-radius: var(--radius);
 }
@@ -938,11 +952,11 @@ div:has(>.course-description-item h2 > br:only-child) {
 	display: none;
 }
 
-:root .card :is(.collapse, .collapsing):has(.card-body:is(.block_alp_player, .block_ucpreviousexams)) {
+:root .card :is(.collapse, .collapsing):has(.card-body:is(.block_alp_player, .block_ucpreviousexams, .block_ucskills)) {
 	display: unset;
 }
 
-:root .card .card-body:is(.block_alp_player, .block_ucpreviousexams) {
+:root .card .card-body:is(.block_alp_player, .block_ucpreviousexams, .block_ucskills) {
 	padding: 0 !important;
 }
 
@@ -962,6 +976,54 @@ div:has(>.course-description-item h2 > br:only-child) {
 	display: none;
 }
 
+:root #inst4883681 .card:has(.card-body.block_ucskills) {
+	display: grid;
+	grid-template-columns: [img-start] minmax(max-content, 1fr) [img-end link-start] minmax(max-content, 2fr) [link-end end];
+	column-gap: 1rem;
+	align-items: center;
+	justify-content: center;
+}
+
+:root #inst4883681 .card:has(.card-body.block_ucskills) .card-header {
+	grid-area: 1 / link-start / 1 / link-end;
+	justify-self: start;
+}
+
+:root #inst4883681 .card:has(.card-body.block_ucskills) .card-header a:is(*, :focus) {
+	padding: 0;
+	border-radius: 0;
+	background-color: transparent;
+	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+	pointer-events: none;
+	user-select: none;
+	text-decoration: none;
+}
+
+:root #inst4883681 .card:has(.card-body.block_ucskills):is(:hover, :focus) .card-header a {
+	text-decoration: underline;
+	color: var(--link-color-hover) !important;
+}
+
+:root #inst4883681 .card :has(.card-body.block_ucskills),
+:root #inst4883681 .card .card-body.block_ucskills,
+:root #inst4883681 .card .card-body.block_ucskills :has(a) {
+	display: contents;
+}
+
+:root #inst4883681 .card .card-body.block_ucskills a {
+	display: grid;
+	grid-template-columns: subgrid;
+	grid-area: 1 / img-start / 1 / end;
+}
+
+:root #inst4883681 .card .card-body.block_ucskills a img {
+	grid-area: 1 / img-start / 1 / img-end;
+	justify-self: end;
+	width: unset;
+	height: calc(1.5rem + 2 * var(--radius));
+	margin-block: calc(0px - var(--radius));
+}
+
 :root #inst4883681:has(~ #inst4918530) {
 	margin-bottom: 0 !important;
 	border-bottom: none;
@@ -970,7 +1032,7 @@ div:has(>.course-description-item h2 > br:only-child) {
 	padding-bottom: 0;
 }
 
-:root #inst4883681:has(~ #inst4918530) .card-body {
+:root #inst4883681:has(~ #inst4918530)>.card-body {
 	padding-bottom: 0 !important;
 }
 
@@ -981,7 +1043,7 @@ div:has(>.course-description-item h2 > br:only-child) {
 	margin-top: 0;
 }
 
-:root #inst4883681~#inst4918530 .card-body {
+:root #inst4883681~#inst4918530>.card-body {
 	padding-top: 0 !important;
 }
 
@@ -1002,10 +1064,38 @@ div:has(>.course-description-item h2 > br:only-child) {
 	border: none;
 
 	&:is(:hover, :focus) {
-		background-color: var(--hover-bg);
+		text-decoration: underline;
 	}
+}
 
-	&:active {
-		background-color: var(--active-bg);
-	}
+form {
+	margin: 0;
+}
+
+:root .activityiconcontainer {
+	border-radius: var(--radius);
+}
+
+.mediaplugin, .mediaplugin video {
+	height: auto;
+}
+
+/* @property --slide-transition {
+	syntax: "<length>";
+	inherit: false;
+} */
+
+[class^="video-attr-"] {
+	position: absolute;
+	right: -190px;
+	transform: translateY(calc(-100% - 45px));
+	clip-path: inset(0 190px 0 0);
+	opacity: 0;
+	transition: right 0.15s ease, clip-path 0.15s ease, opacity 0.15s ease;
+}
+
+.mediaplugin:hover [class^="video-attr-"] {
+	right: 10px;
+	clip-path: inset(0 -10px 0 0);
+	opacity: 1;
 }

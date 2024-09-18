@@ -10,7 +10,9 @@
 				"uclearn/background.png",
 				"uclearn/mathquill/bootload.js",
 				"uclearn/mathquill/mathquill.min.js",
-				"uclearn/ASCIIMathTeXImg.js"
+				"uclearn/ASCIIMathTeXImg.js",
+				"uclearn/patches.js",
+				"uclearn/wasm/pkg/wasm_bg.wasm"
 			],
 			"matches": ["*://learn.canterbury.ac.nz/*"]
 		}
@@ -23,10 +25,20 @@
 	},
 	"content_scripts": [
 		{
-			"matches": ["*://*.canterbury.ac.nz/*"],
+			"matches": ["*://learn.canterbury.ac.nz/*"],
 			"css": ["uclearn/index.css", "uclearn/mathquill/mathquill.css"],
 			"js": ["uclearn/index.js"],
 			"run_at": "document_idle"
+		},
+		{
+			"matches": ["*://learn.canterbury.ac.nz/*"],
+			"js": [
+				"uclearn/video.js",
+				"uclearn/wasm/pkg/wasm.js",
+				"uclearn/hydration.js"
+			],
+			"run_at": "document_start",
+			"world": "MAIN"
 		},
 		{
 			"matches": ["<all_urls>"],
